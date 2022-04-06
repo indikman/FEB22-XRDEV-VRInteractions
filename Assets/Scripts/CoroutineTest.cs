@@ -7,21 +7,20 @@ public class CoroutineTest : MonoBehaviour
     public GameObject testObject;
     public float timeToFade;
 
+    public Transform startPoint;
+    public Transform endPoint;
+
+    [Range(0,1)]
+    public float lerpValue = 0; // This is gonna be a value 0-1
    
     void Start()
     {
-        StartCoroutine(Fader());
+        
     }
 
-    IEnumerator Fader()
+    private void Update()
     {
-        yield return new WaitForSeconds(timeToFade);
-
-        testObject.SetActive(false);
-
-        yield return new WaitForSeconds(timeToFade);
-
-        testObject.SetActive(true);
+        testObject.transform.position = Vector3.Lerp(startPoint.position, endPoint.position, lerpValue);
     }
 
 
